@@ -20,10 +20,7 @@ def read_json_files_in_folder(folder_path):
             with open(file_path, 'r') as file:
 
                 json_data_r = json.load(file)
-
                 monitor_path = json_data_r["monitor"]
-                
-
                 json_data_w[f"monitor{i}"] = monitor_path
     
 
@@ -59,5 +56,6 @@ while True:
     elif (ura[:10] != f"{datetime.now()}"[:10]):
         for process_name in exe_names:
           check_and_terminate_process(process_name)
+
 
 
