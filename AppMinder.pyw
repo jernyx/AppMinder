@@ -28,10 +28,10 @@ class File:
 
 
 def on_enter(event):
-    event.widget.config(bg="#E8E8E8")  # Change background color when mouse enters
+    event.widget.config(bg="#E8E8E8")  # Zamenjaš barvo odzadja ob vstopu miške
 
 def on_leave(event):
-    event.widget.config(bg="#E0E0E0")   # Change background color when mouse leaves
+    event.widget.config(bg="#E0E0E0")   # Zamenjaš barvo odzadja ob zapustitvi miške
 
 
 def launchSelectedProgram():
@@ -61,7 +61,6 @@ def deleteItem(item_name):
     os.remove(f"pics/{item_name}.png")
 
 
-# Add button function
 def okButton(name, path, icon, monitor):
     if name.strip() and path.strip():
         shutil.copyfile(icon, f"pics/{name}.png")
@@ -91,19 +90,18 @@ def okButton(name, path, icon, monitor):
         window.update()
 
 def randomCapitalize(sentence):
-    # Convert the sentence to a list of characters
      chars = list(sentence)
 
      for i, char in enumerate(chars):
-        # Check if the character is a letter or a special character
+        # Preveit moraš za šumnike
         if char.isalpha() or char in ["š", "č", "ž"]:
-            # Generate a random number between 0 and 1
+            # Generiraš naključno število med 0 in 1
             rand_num = random.random()
-            # Randomly capitalize the character with a 50% probability
+            # Naključno kapitalizeraš črko z 50% verjetnostjo
             if rand_num < 0.5:
                 chars[i] = char.upper()
 
-     # Join the characters back into a string
+     # Združiš vse črke nazaj v stavek
      return ''.join(chars)
 
 def enterButton(sentence, text, text_window):
@@ -148,7 +146,7 @@ def openText():
     screen_width_Text = openTextWindow.winfo_screenwidth()
     screen_height_Text = openTextWindow.winfo_screenheight()
 
-    # x and y are dimensions of our OTP window
+    # x in y sta dimenziji našega OTP zaslona
     x_Text = int((screen_width_Text / 2) - (300 / 2))
     y_Text = int((screen_height_Text / 2) - (150 / 2))
 
@@ -192,15 +190,13 @@ def openText():
 
     entry_Text.bind("<FocusIn>", change_keyboard_lang)
 
-    #terminate entire program when OTP window is closed  
     def on_closing():
-        # Destroy the Toplevel window
+
         openTextWindow.destroy()
-        # Terminate the entire program
+
         window.quit()
         window.destroy()
 
-    # Intercept the close event
     openTextWindow.protocol("WM_DELETE_WINDOW", on_closing)
    
 
@@ -213,7 +209,6 @@ def openOTP():
     screen_width_OTP = openOTP.winfo_screenwidth()
     screen_height_OTP = openOTP.winfo_screenheight()
 
-    # x and y are dimensions of our OTP window
     x_OTP = int((screen_width_OTP / 2) - (300 / 2))
     y_OTP = int((screen_height_OTP / 2) - (150 / 2))
 
@@ -248,22 +243,21 @@ def openOTP():
     button_submit.bind("<Leave>", on_leave)  # Bind on_leave function to mouse leave event 
 
 
-    #terminate entire program when OTP window is closed  
+    #terminacija celotnega programa ko zapremo OTP window
     def on_closing():
-        # Destroy the Toplevel window
+
         openOTP.destroy()
-        # Terminate the entire program
+
         window.quit()
         window.destroy()
 
-    # Intercept the close event
     openOTP.protocol("WM_DELETE_WINDOW", on_closing)
 
     
-# settings window
+
 def openSettings():
 
-    # Add item frame
+
     openSettings = Toplevel(window)
     openSettings.title("Settings")
     openSettings.geometry(f"415x350+{window.winfo_rootx() + 220}+{window.winfo_rooty() + 35}")
@@ -321,7 +315,7 @@ def openSettings():
         ),text="Add", relief=FLAT, borderwidth=0, pady=0, padx=5)
     button_add.pack()
     
-    # Remove Item frame
+
     frame2 = Frame(openSettings, bg="#E0E0E0", width=410, height=80, highlightbackground="#888888", highlightthickness=1)
     frame2.pack(padx=20, pady=0)
 
@@ -375,7 +369,7 @@ with open("appminder.json", "r", encoding="utf-8") as f:
     if (ura[:10] == f"{datetime.now()}"[:10]) :
         pass
     elif (ura[:10] != f"{datetime.now()}"[:10]):
-        # Hide main launcher window
+        # Skriješ main launcher window
         window.withdraw()
         openOTP()
 
@@ -393,14 +387,14 @@ style.configure(
     foreground="white",
     relief="flat",
 )
-# Removes border
+
 style.layout("Treeview", [("Treeview.treearea", {"sticky": "nswe"})])
 
 tree = ttk.Treeview(show="tree")
 tree.configure(style="Custom.Treeview", height=2)
 tree.pack(fill=BOTH, expand=True, padx=13, pady=(20, 3))
 
-# Settings button
+
 cogwheel = PhotoImage(file="pics/settings.png")
 button7 = Button(
     image=cogwheel,
@@ -414,7 +408,7 @@ button7 = Button(
 )
 button7.pack(padx=(0, 15), pady=(15, 20), side="right")
 
-# Launch button
+
 launchbutton = PhotoImage(file="pics/launch.png")
 button9 = Button(
     image=launchbutton,
@@ -456,6 +450,7 @@ for profile in os.listdir("profiles"):
 
 window.iconbitmap("pics/window_logo.ico")
 window.mainloop()
+
 
 
 
